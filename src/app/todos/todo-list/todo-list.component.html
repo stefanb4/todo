@@ -1,0 +1,84 @@
+<div class="row">
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="expirationDate">Expiration Date</label>
+          <input
+            type="date"
+            id="expirationDate"
+            formControlName="expirationDate"
+            class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            type="text"
+            id="description"
+            class="form-control"
+            formControlName="description"
+            rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!todoForm.valid">Save</button>
+      </div>
+    </div>
+  </form>
+</div>
+<hr>
+<div class="container" *ngIf="todos.length > 0">
+  <div class="row header-style">
+    <div class="col-3 header-font">
+      Description
+    </div>
+    <div class="col-3 header-font">
+      Created Date
+    </div>
+    <div class="col-3 header-font">
+      Expiration Date
+    </div>
+    <div class="col-2 header-font">
+      Completed
+    </div>
+    <div class="col-1 header-font">
+    </div>
+  </div>
+      <div class="row row-style"
+       *ngFor="let todoItem of todos; let i = index"
+       [style.color]="(todoItem.expirationDate < today  && (!todoItem.completed)) ? 'red' : 'green'">
+         <div class="col-3">
+            {{ todoItem.description }}
+        </div>
+        <div class="col-3">
+            {{ todoItem.createdDate | date:'mediumDate' }}
+        </div>
+        <div class="col-3">
+            {{ todoItem.expirationDate | date:'mediumDate' }}
+        </div>
+        <div class="col-2">
+            <input [(ngModel)]="todoItem.completed" type="checkbox"/>
+        </div>
+        <div class="col-1">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDeleteTodo(i)">X</button>
+        </div>
+      </div>
+</div>
+<div class="container" *ngIf="todos.length === 0">
+  <p>No Tasks</p>
+</div>
+<br>
+

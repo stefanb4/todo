@@ -1,0 +1,16 @@
+.header-font
+{
+  font-weight: 600;
+}
+
+.header-style
+{
+  background-color:lightskyblue;
+  border: thin solid darkgray;
+}
+
+.row-style
+{
+  background-color:gainsboro;
+  border: thin solid darkgray;
+}
